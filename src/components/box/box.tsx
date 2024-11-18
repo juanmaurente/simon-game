@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import styles from './box.module.css';
 
 interface Props {
@@ -8,11 +9,15 @@ interface Props {
 }
 
 const Box = ({ color, handleSelection, isActive, isSuccess }: Props) => {
+	useEffect(() => {
+		console.log(isActive);
+	}, [isActive]);
+
 	return (
 		<div
 			className={`${styles.box} 
 							${isSuccess ? styles.success : styles[color]} 
-							${isActive ? styles.active : ''}`}
+							${isActive ? styles[`${color}Active`] : ''}`}
 			onClick={handleSelection}></div>
 	);
 };

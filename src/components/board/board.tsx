@@ -10,6 +10,8 @@ const Board = () => {
 	const [activeColor, setActiveColor] = useState<string | null>(null);
 	const [success, setSuccess] = useState(false);
 
+
+
 	useEffect(() => {
 		console.log(userArray, gameSequence);
 	}, [userArray, gameSequence]);

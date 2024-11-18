@@ -5,6 +5,7 @@
 	align-items: center;
 	justify-content: center;
 	border-radius: 10px;
+	cursor: pointer;
 }
 
 .red {
@@ -17,16 +18,23 @@
 	background-color: red;
 }
 
+.redActive {
+	background-color: red;
+}
+
 .blue {
 	border-top-right-radius: 100px;
-	background-color: blue;
+	background-color: rgb(1, 1, 173);
 	transition: all 0.1s ease-in-out;
 }
 
 .blue:active {
-	background-color: rgb(39, 39, 122);
+	background-color: rgb(46, 46, 251);
 }
 
+.blueActive {
+	background-color: rgb(46, 46, 251);
+}
 .green {
 	border-bottom-right-radius: 100px;
 	transition: all 0.1s ease-in-out;
@@ -34,6 +42,10 @@
 }
 
 .green:active {
+	background-color: rgb(3, 188, 3);
+}
+
+.greenActive {
 	background-color: rgb(3, 188, 3);
 }
 
@@ -47,13 +59,17 @@
 	background-color: yellow;
 }
 
+.yellowActive {
+	background-color: yellow;
+}
+
 .success {
 	background-color: rgb(3, 188, 3) !important;
 	animation: blink 0.5s infinite alternate;
 }
 
-.failure {
-	background-color: red !important;
+.active {
+	background-color: rgba(255, 0, 0, 0) !important;
 	animation: blink 0.5s infinite alternate;
 }
 
