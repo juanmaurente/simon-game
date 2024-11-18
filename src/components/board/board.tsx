@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Box from '../box/box';
 import styles from './board.module.css';
 
@@ -9,8 +9,6 @@ const Board = () => {
 	const [userArray, setUserArray] = useState<string[]>([]);
 	const [activeColor, setActiveColor] = useState<string | null>(null);
 	const [success, setSuccess] = useState(false);
-
-
 
 	useEffect(() => {
 		console.log(userArray, gameSequence);
