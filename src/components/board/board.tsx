@@ -7,7 +7,12 @@ const Board = () => {
 	const [round, setRound] = useState(0);
 	const [gameSequence, setGameSequence] = useState<string[]>([]);
 	const [userArray, setUserArray] = useState<string[]>([]);
-	const [error, setError] = useState(false);
+	const [activeColor, setActiveColor] = useState<string | null>(null);
+	const [success, setSuccess] = useState(false);
+
+	useEffect(() => {
+		console.log(userArray, gameSequence);
+	}, [userArray, gameSequence]);
 
 	// Generar una nueva secuencia cuando comienza una ronda
 	useEffect(() => {
@@ -18,6 +23,30 @@ const Board = () => {
 		}
 	}, [round]);
 
+	// Mostrar la secuencia de colores
+	useEffect(() => {
+		if (gameSequence.length > 0 && round > 0) {
+			let index = 0;
+
+			const showSequence = setInterval(() => {
+				// Activar el color actual
+				setActiveColor(gameSequence[index]);
+
+				// Desactivar el color después de 500ms
+				setTimeout(() => setActiveColor(null), 500);
+
+				index++;
+
+				// Si llegamos al final de la secuencia, detener el intervalo
+				if (index >= gameSequence.length) {
+					clearInterval(showSequence);
+				}
+			}, 1000);
+
+			return () => clearInterval(showSequence);
+		}
+	}, [gameSequence]);
+
 	// Validar las selecciones del usuario
 	useEffect(() => {
 		if (userArray.length > 0) {
@@ -25,27 +54,37 @@ const Board = () => {
 
 			// Verificar si la selección es correcta
 			if (userArray[currentIndex] !== gameSequence[currentIndex]) {
-				console.log('PERDISTE, VUELVE A INTENTARLO');
-				setError(true);
-				setGameSequence([]); // Reiniciar secuencia
-				setUserArray([]);
-				setRound(0);
+				console.log('PERDISTE');
+				resetGame();
 			} else if (userArray.length === gameSequence.length) {
-				console.log('ÉXITO - SIGUIENTE RONDA');
-				setRound((prevRound) => prevRound + 1);
+				console.log('ÉXITO');
+				triggerSuccess();
+				setTimeout(() => setRound((prevRound) => prevRound + 1), 1000); // Nueva ronda después del éxito
 			}
 		}
 	}, [userArray]);
 
-	const handleSelection = (color: string) => {
-		if (!error) {
-			setUserArray((prev) => [...prev, color]);
-		}
+	// Señal de éxito
+	const triggerSuccess = () => {
+		setSuccess(true);
+		setTimeout(() => setSuccess(false), 1500);
 	};
 
+	// Manejar selección del usuario
+	const handleSelection = (color: string) => {
+		setUserArray((prev) => [...prev, color]);
+	};
+
+	// Reiniciar el juego
+	const resetGame = () => {
+		setGameSequence([]);
+		setUserArray([]);
+		setRound(0);
+	};
+
+	// Iniciar el juego
 	const startGame = () => {
-		setRound(1); // Iniciar el juego
-		setError(false);
+		setRound(1);
 	};
 
 	return (
@@ -62,6 +101,8 @@ const Board = () => {
 							key={color}
 							color={color}
 							handleSelection={() => handleSelection(color)}
+							isActive={activeColor === color}
+							isSuccess={success}
 						/>
 					))}
 				</div>

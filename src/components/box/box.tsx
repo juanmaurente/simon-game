@@ -3,14 +3,18 @@ import styles from './box.module.css';
 interface Props {
 	color: string;
 	handleSelection: () => void;
+	isActive: boolean;
+	isSuccess: boolean;
 }
 
-const box = ({ color, handleSelection }: Props) => {
+const Box = ({ color, handleSelection, isActive, isSuccess }: Props) => {
 	return (
 		<div
-			className={`${styles.box} ${styles[color]}`}
+			className={`${styles.box} 
+							${isSuccess ? styles.success : styles[color]} 
+							${isActive ? styles.active : ''}`}
 			onClick={handleSelection}></div>
 	);
 };
 
-export default box;
+export default Box;
