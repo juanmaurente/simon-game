@@ -6,37 +6,39 @@
 .red {
 	background-color: rgb(169, 14, 14);
 	border-top-left-radius: 100px;
+	transition: 0.1s ease-in-out all;
 }
 
-.red-selected {
-	border-top-left-radius: 100px;
+.red:active {
 	background-color: red;
 }
 
 .blue {
 	border-top-right-radius: 100px;
 	background-color: blue;
+	transition: all 0.1s ease-in-out;
 }
 
-.blue-selected {
-	border-top-right-radius: 100px;
+.blue:active {
 	background-color: rgb(39, 39, 122);
 }
 
 .green {
-	background-color: rgb(6, 95, 6);
 	border-bottom-right-radius: 100px;
+	transition: all 0.1s ease-in-out;
+	background-color: rgb(18, 78, 18);
 }
 
-.green-selected {
+.green:active {
 	background-color: green;
 }
 
 .yellow {
-	border-bottom-left-radius: 100px;
 	background-color: rgb(201, 201, 59);
+	transition: all 0.1s ease-in-out;
+	border-bottom-left-radius: 100px;
 }
 
-.yellow-selected {
+.yellow:active {
 	background-color: yellow;
 }
